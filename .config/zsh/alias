@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+alias artifacts='lftp sftp://artifacts@fe-artifacts.dev.kbee.lan'
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+decrypt-log() {
+  ~/dev/MC/mc7duallinux/bin/decrypt $1 ~/artifacts/rsa-keys-logs-1.0.1/private/mc-logs.key.pem
+}
+
+race() {
+  case "$1" in
+    shell)
+      . $(cd ~/dev/race; poetry env info --path)/bin/activate
+      ;;
+    *)
+      $(cd ~/dev/race; poetry env info --path)/bin/race $@
+  esac
+}

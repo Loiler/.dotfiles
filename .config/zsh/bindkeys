@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+bindkey -M vicmd '^o' history-beginning-search-backward
+bindkey -M vicmd '^i' history-beginning-search-forward
