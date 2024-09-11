@@ -177,6 +177,8 @@ Plug 'NvChad/nvim-colorizer.lua'
 "Plug 'm4xshen/hardtime.nvim'
 "Plug 'tris203/precognition.nvim'
 
+Plug 'epwalsh/obsidian.nvim'
+
 call plug#end()
 
 set background=dark

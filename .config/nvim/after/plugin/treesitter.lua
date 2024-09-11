@@ -1,7 +1,7 @@
 local treesitter = require('nvim-treesitter.configs')
 
 treesitter.setup {
-  ensure_installed = { "haskell", "lua", "vim", "vimdoc", "python" },
+  ensure_installed = { "lua", "vim", "vimdoc", "templ" },
   sync_install = false,
   auto_install = false,
   highlight = {

@@ -31,6 +31,8 @@ local custom_format = function()
     end
 end
 
+vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = custom_format })
+
 local function configure()
   vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
   vim.keymap.set("n", "<leader>rj", custom_format, { buffer = 0 })
@@ -78,19 +80,19 @@ lspconfig.lua_ls.setup {
 	},
 }
 
-lspconfig.hls.setup{
-  capabilities = capabilities,
-  on_attach = function()
-    configure()
-  end,
-  filetypes = { 'haskell', 'lhaskell', 'cabal' },
-  settings = {
-    haskell = {
-      formattingProvider = "fourmolu",
-      checkProject = true,
-    },
-  },
-}
+--lspconfig.hls.setup{
+--  capabilities = capabilities,
+--  on_attach = function()
+--    configure()
+--  end,
+--  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+--  settings = {
+--    haskell = {
+--      formattingProvider = "fourmolu",
+--      checkProject = true,
+--    },
+--  },
+--}
 
 lspconfig.tsserver.setup{
   capabilities = capabilities,
@@ -129,19 +131,19 @@ lspconfig.templ.setup{
   end,
 }
 
-lspconfig.rust_analyzer.setup{
-  capabilities = capabilities,
-  on_attach = function()
-    configure()
-  end,
-  settings = {
-    ["rust-analyzer"] = {
-      checkOnSave = {
-        command = "clippy"
-      }
-    }
-  },
-}
+--lspconfig.rust_analyzer.setup{
+--  capabilities = capabilities,
+--  on_attach = function()
+--    configure()
+--  end,
+--  settings = {
+--    ["rust-analyzer"] = {
+--      checkOnSave = {
+--        command = "clippy"
+--      }
+--    }
+--  },
+--}
 
 lspconfig.bashls.setup{
   capabilities = capabilities,
@@ -155,6 +157,7 @@ lspconfig.tailwindcss.setup{
   on_attach = function()
     configure()
   end,
+  filetypes = { "html", "templ" },
 }
 
 lspconfig.html.setup({
@@ -173,25 +176,21 @@ lspconfig.htmx.setup{
   filetypes = { "html", "templ" },
 }
 
-configs.lf = {
-  default_config = {
-    cmd = { 'ride', '-i', 'language-server' },
-    --cmd = { '/home/loib_st/dev/ride-cli/dist-newstyle/build/x86_64-linux/ghc-9.2.8/ride-cli-1.1.2/x/ride/noopt/build/ride/ride', '-i', 'language-server', '--lib=/home/loib_st/dev/ride-cli/lib/ride-cli' },
-    --cmd = { '/home/loib_st/dev/lf-language-server/dist-newstyle/build/x86_64-linux/ghc-9.2.8/lf-language-server-1.0.0/x/lf-language-server/noopt/build/lf-language-server/lf-language-server', '/home/loib_st/dev/ride-cli/lib/ride-cli/lua/bin/lua-language-server' },
-    filetypes = { 'lf' },
-    root_dir = function(fname)
-      return util.root_pattern(unpack({'Makefile'}))(fname) or util.find_git_ancestor(fname)
-    end,
-    single_file_support = true,
-    capabilities = capabilities,
-    on_attach = function()
-      configure()
-    end,
-  },
-}
-
-lspconfig.lf.setup {}
-
-
-
-
+--configs.lf = {
+--  default_config = {
+--    cmd = { 'ride', '-i', 'language-server' },
+--    --cmd = { '/home/loib_st/dev/ride-cli/dist-newstyle/build/x86_64-linux/ghc-9.2.8/ride-cli-1.1.2/x/ride/noopt/build/ride/ride', '-i', 'language-server', '--lib=/home/loib_st/dev/ride-cli/lib/ride-cli' },
+--    --cmd = { '/home/loib_st/dev/lf-language-server/dist-newstyle/build/x86_64-linux/ghc-9.2.8/lf-language-server-1.0.0/x/lf-language-server/noopt/build/lf-language-server/lf-language-server', '/home/loib_st/dev/ride-cli/lib/ride-cli/lua/bin/lua-language-server' },
+--    filetypes = { 'lf' },
+--    root_dir = function(fname)
+--      return util.root_pattern(unpack({'Makefile'}))(fname) or util.find_git_ancestor(fname)
+--    end,
+--    single_file_support = true,
+--    capabilities = capabilities,
+--    on_attach = function()
+--      configure()
+--    end,
+--  },
+--}
+--
+--lspconfig.lf.setup {}
